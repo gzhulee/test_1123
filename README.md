@@ -164,9 +164,9 @@ class ApplicationController < ActionController::Base
     if project and  @project.audit_flag.to_i == 3 and !@project.blocked
       render_del_yet
     end
-    # Some difference between CODE Enterprise and CODE Community
-    # If user not login. CODE Enterprise will require user to login to view the project page.
-    # CODE Community Just tell client that you are access_denied!
+    # -Some difference between CODE Enterprise and CODE Community
+    # -If user not login. CODE Enterprise will require user to login to view the project page.
+    # -CODE Community Just tell client that you are access_denied!
     if current_user.blank? || current_user.id.blank? #user not login or not exists.
       return require_login? unless Gitlab::SystemConfigsUtil.isCommunity
     end
@@ -254,10 +254,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def render_drb_server_time_out
-    store_pre_url
-    render file: Rails.root.join("public", "drb_server_time_out"), layout: false, status: "500"
-  end
+  # def render_drb_server_time_out
+  #   store_pre_url
+  #   render file: Rails.root.join("public", "drb_server_time_out"), layout: false, status: "500"
+  # end
 
   def render_404
     store_pre_url
@@ -297,7 +297,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_language
-    #优先从数据库中查询用户设置的语言
+    # -优先从数据库中查询用户设置的语言
     if Gitlab::SystemConfigsUtil.multi_language?
       session[:locale_language] = @current_user.default_language if @current_user.default_language.present? and session[:locale_language].to_s == ""
 
