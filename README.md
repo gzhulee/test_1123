@@ -1,4 +1,4 @@
-Hello branch_op
+Hello branch_op_ddd
 # coding: utf-8
 
 require 'gitlab/grit_diff'
@@ -83,9 +83,9 @@ class ApplicationController < ActionController::Base
     KeyObserver.current_user = current_user
   end
 
-  # def abilities
-  #   @abilities ||= Six.new
-  # end
+  def abilities
+    @abilities ||= Six.new
+  end
 
   def can?(object, action, subject)
     abilities.allowed?(object, action, subject)
@@ -138,9 +138,9 @@ class ApplicationController < ActionController::Base
     nil
   end
 
-  # def add_abilities
-  #   abilities << Ability
-  # end
+  def add_abilities
+    abilities << Ability
+  end
 
   #检查当前用户是否当前项目的成员
   def is_public_or_project_member
@@ -254,10 +254,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # def render_drb_server_time_out
-  #   store_pre_url
-  #   render file: Rails.root.join("public", "drb_server_time_out"), layout: false, status: "500"
-  # end
+  def render_drb_server_time_out
+    store_pre_url
+    render file: Rails.root.join("public", "drb_server_time_out"), layout: false, status: "500"
+  end
 
   def render_404
     store_pre_url
@@ -360,5 +360,8 @@ class ApplicationController < ActionController::Base
     @can_visit_webide = false
     @can_visit_webide = WebideTester.where(username: @current_user.username).present?
   end
+
+
+
 
 end
