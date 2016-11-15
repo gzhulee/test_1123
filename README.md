@@ -1,4 +1,4 @@
-Hello branch_op_world
+Hello branch_op
 # coding: utf-8
 
 require 'gitlab/grit_diff'
@@ -36,8 +36,8 @@ class ApplicationController < ActionController::Base
     render_404
   end
 
-  #render_drb_server_time_out
-  #rescue_from DRb::DRbConnError do |exception|
+  render_drb_server_time_out
+  rescue_from DRb::DRbConnError do |exception|
   rescue_from DRb::DRbTimeout do |exception|
     log_exception(exception)
     render_drb_server_time_out
@@ -83,9 +83,9 @@ class ApplicationController < ActionController::Base
     KeyObserver.current_user = current_user
   end
 
-  def abilities
-    @abilities ||= Six.new
-  end
+  # def abilities
+  #   @abilities ||= Six.new
+  # end
 
   def can?(object, action, subject)
     abilities.allowed?(object, action, subject)
@@ -138,9 +138,9 @@ class ApplicationController < ActionController::Base
     nil
   end
 
-  def add_abilities
-    abilities << Ability
-  end
+  # def add_abilities
+  #   abilities << Ability
+  # end
 
   #检查当前用户是否当前项目的成员
   def is_public_or_project_member
@@ -226,9 +226,9 @@ class ApplicationController < ActionController::Base
     render_404
   end
 
-  def not_found!
+  # def not_found!
     render_404
-  end
+  # end
 
   def git_not_found!
     render_404
@@ -356,9 +356,9 @@ class ApplicationController < ActionController::Base
     return blobs
   end
 
-  # def check_visit_snippets
-  #   @can_visit_webide = false
-  #   @can_visit_webide = WebideTester.where(username: @current_user.username).present?
-  # end
+  def check_visit_snippets
+    @can_visit_webide = false
+    @can_visit_webide = WebideTester.where(username: @current_user.username).present?
+  end
 
 end
