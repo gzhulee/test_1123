@@ -53,6 +53,7 @@
                   = raw(comments_template.gsub('%%line_code%%', line[:right][:line_code]).gsub("%%parallel%%", "right"))
               %td.line_content.parallel{class: "noteable_line #{line[:right][:type]}", "line_code" => line[:right][:line_code]}= raw diff_line_content(line[:right][:text])
           - if @reply_allowed
+            fdsafdsfsdfsdafdsfdsa
             - comments = {"left" => [], "right" => []}
             - leftComments = @line_notes.select { |n| n.line_code == line[:left][:line_code] }
             - rightComments = @line_notes.select { |n| n.line_code == line[:right][:line_code] && line[:left][:line_code] != line[:right][:line_code]}
