@@ -38,6 +38,10 @@
               %td.old_line
                 = link_to "...", get_more_code_project_commit_path(@project,@commit, start_num:line[:left][:start_num], end_num:line[:left][:end_num], file_name:diff.old_path, view:'parallel'), remote:true
               %td.line_content.matched= raw diff_line_content(line[:left][:text])
+%td.line_content.matched= raw diff_line_content(line[:left][:text])
+%td.line_content.matched= raw diff_line_content(line[:left][:text])
+%td.line_content.matched= raw diff_line_content(line[:left][:text])
+%td.line_content.matched= raw diff_line_content(line[:left][:text])
               %td.new_line
                 = link_to "...", get_more_code_project_commit_path(@project,@commit, start_num:line[:left][:start_num], end_num:line[:left][:end_num], file_name:diff.old_path, view:'parallel'), remote:true
               %td.line_content.parallel.matched= raw diff_line_content(line[:right][:text])
