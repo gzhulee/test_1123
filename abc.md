@@ -2,9 +2,9 @@
   .alert.alert-warning
     = t("merge_request.file_access_change")
 - if !diff.nil? and diff.present?
-  - too_big = diff.diff.lines.count > 5000 || diff.diff.to_s =~ /^FIleToBig======, \d+, \d+/
-
-  - if too_big
+   too_big = diff.diff.lines.count > 5000 || diff.diff.to_s =~ /^FIleToBig======, \d+, \d+/
+    456
+   if too_big
     .alert.alert-danger
       = t("merge_request.change_too_much")
   - else
@@ -30,26 +30,22 @@
             - comments = @line_notes.select { |n| n.line_code == line_code }
             - unless comments.empty?
               = render "notes/line_code_notes", notes: comments,  hidden: false
-    - else
-      %table.commit-diff.parallel
-        - parallel_diff_parallelize(diff).each do |line|
-          %tr.line_holder{:id => "parallel_line_#{line[:left][:end_num]}"}
+    else
+      able.commit-diff.parallel
+        parallel_diff_parallelize(diff).each do |line|
+          tr.line_holder{:id => "parallel_line_#{line[:left][:end_num]}"}
             - if line[:left][:type] == "match"
               %td.old_line
                 = link_to "...", get_more_code_project_commit_path(@project,@commit, start_num:line[:left][:start_num], end_num:line[:left][:end_num], file_name:diff.old_path, view:'parallel'), remote:true
               %td.line_content.matched= raw diff_line_content(line[:left][:text])
-%td.line_content.matched= raw diff_line_content(line[:left][:text])
-%td.line_content.matched= raw diff_line_content(line[:left][:text])
-%td.line_content.matched= raw diff_line_content(line[:left][:text])
-%td.line_content.matched= raw diff_line_content(line[:left][:text])
+
               %td.new_line
                 = link_to "...", get_more_code_project_commit_path(@project,@commit, start_num:line[:left][:start_num], end_num:line[:left][:end_num], file_name:diff.old_path, view:'parallel'), remote:true
               %td.line_content.parallel.matched= raw diff_line_content(line[:right][:text])
             - else
               %td.old_line{class: "#{line[:left][:type]}"}
                 = link_to raw(line[:left][:type] == "new" ? "&nbsp;" : line[:left][:number]), "##{line[:left][:line_code]}"
-                - if @comments_allowed
-                  = raw(comments_template.gsub('%%line_code%%', line[:left][:line_code]).gsub("%%parallel%%", "left"))
+                %td.line_content.parallel.matched= raw diff_line_content(line[:right][:text])
               %td.line_content.parallel{class: "noteable_line #{line[:left][:type]}", "line_code" => line[:left][:line_code]}= raw diff_line_content(line[:left][:text])
               %td.new_line{class: "#{line[:right][:type]}"}
                 = link_to raw(line[:right][:type] == "old" ? "&nbsp;" : "#{line[:right][:number]}"), "##{line[:right][:line_code]}"
@@ -57,6 +53,10 @@
                   = raw(comments_template.gsub('%%line_code%%', line[:right][:line_code]).gsub("%%parallel%%", "right"))
               %td.line_content.parallel{class: "noteable_line #{line[:right][:type]}", "line_code" => line[:right][:line_code]}= raw diff_line_content(line[:right][:text])
           - if @reply_allowed
+          %td.line_content.matched= raw diff_line_content(line[:left][:text])
+%td.line_content.matched= raw diff_line_content(line[:left][:text])
+%td.line_content.matched= raw diff_line_content(line[:left][:text])
+%td.line_content.matched= raw diff_line_content(line[:left][:text])
             fdsafdsfsdfsdafdsfdsa
             - comments = {"left" => [], "right" => []}
             - leftComments = @line_notes.select { |n| n.line_code == line[:left][:line_code] }
